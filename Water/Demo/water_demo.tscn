@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://8je6n0wn5bgf"]
+
+[ext_resource type="Material" uid="uid://imhpc6nmwktm" path="res://addons/Mournguard-Shaders/Water/water_material.tres" id="1_t46t2"]
+[ext_resource type="VoxelGIData" uid="uid://b70cbdmgc8r7y" path="res://addons/Mournguard-Shaders/Water/Demo/water_demo.VoxelGI_data.res" id="2_0c71k"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_le4rk"]
+energy_multiplier = 4.0
+
+[sub_resource type="Sky" id="Sky_u588f"]
+sky_material = SubResource("ProceduralSkyMaterial_le4rk")
+
+[sub_resource type="Environment" id="Environment_hbx0e"]
+background_mode = 2
+sky = SubResource("Sky_u588f")
+ambient_light_source = 3
+tonemap_mode = 4
+tonemap_exposure = 1.3
+ssao_enabled = true
+sdfgi_enabled = true
+volumetric_fog_density = 0.001
+
+[sub_resource type="TorusMesh" id="TorusMesh_4ovs6"]
+inner_radius = 2.0
+outer_radius = 8.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_4bmwp"]
+inner_radius = 6.0
+outer_radius = 10.0
+
+[node name="WaterDemo" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hbx0e")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.93225443, 0.23444879, -0.27556401, 4.9793254e-09, 0.76164013, 0.64800024, 0.36180353, -0.6041011, 0.7100425, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Water" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, 0.86617804, 0)
+mesh = SubResource("TorusMesh_4ovs6")
+material = ExtResource("1_t46t2")
+
+[node name="Bowl Edge" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("TorusMesh_4bmwp")
+
+[node name="Bowl Middle" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, 1.051513, 0)
+radius = 4.0
+radial_segments = 32
+rings = 64
+
+[node name="Bowl Bottom" type="CSGCylinder3D" parent="."]
+radius = 8.0
+height = 1.0
+sides = 32
+
+[node name="VoxelGI" type="VoxelGI" parent="."]
+subdiv = 0
+size = Vector3(25, 25, 25)
+data = ExtResource("2_0c71k")

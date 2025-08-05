@@ -1,0 +1,40 @@
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://imhpc6nmwktm"]
+
+[ext_resource type="Shader" uid="uid://xl06ox4uk3yv" path="res://addons/Mournguard-Shaders/Water/water_shader.tres" id="1_u3tpa"]
+[ext_resource type="Texture2D" uid="uid://be1mosl4a7c1l" path="res://addons/Mournguard-Shaders/Water/Assets/Foam_001_Albedo.png" id="2_w0urf"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ms3ao"]
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kch6h"]
+noise = SubResource("FastNoiseLite_ms3ao")
+seamless = true
+as_normal_map = true
+bump_strength = 4.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hx8e0"]
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4471b"]
+noise = SubResource("FastNoiseLite_hx8e0")
+seamless = true
+as_normal_map = true
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_u3tpa")
+shader_parameter/flow_strength = 0.050000002375
+shader_parameter/color_shallow = Color(0.639216, 0.717647, 0.768627, 1)
+shader_parameter/color_deep = Color(0.262745, 0.321569, 0.411765, 1)
+shader_parameter/depth_sharpness = 0.10000000475000001
+shader_parameter/depth_offset = 0.86400004104
+shader_parameter/water_A_normal = SubResource("NoiseTexture2D_kch6h")
+shader_parameter/water_B_normal = SubResource("NoiseTexture2D_4471b")
+shader_parameter/water_AB_fade = 0.400000019
+shader_parameter/normal_strength = 0.6000000285
+shader_parameter/refraction = 0.30000001425
+shader_parameter/foam_scale = 3.0000001425000002
+shader_parameter/foam = ExtResource("2_w0urf")
+shader_parameter/opacity = 0.9
+shader_parameter/blend = 0.20000000950000002
+shader_parameter/roughness = 0.2000000095
