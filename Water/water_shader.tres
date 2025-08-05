@@ -289,7 +289,7 @@ operator = 2
 op_type = 0
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_e0gxv"]
-default_input_values = [0, 0.0, 1, -0.19999999999708962]
+default_input_values = [0, 0.0, 1, -0.1999999999970896]
 operator = 2
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_houh8"]

@@ -41,14 +41,13 @@ func _get_code(input_vars: Array[String], output_vars: Array[String], _mode: Sha
 	return "
 float aspect_ratio = VIEWPORT_SIZE.x / VIEWPORT_SIZE.y;
 vec2 correction = vec2(aspect_ratio, 1.0);
-vec2 screen_uv = FRAGCOORD.xy / VIEWPORT_SIZE.xy;
 
 vec3 dir = normalize(keyhole_world_position - NODE_POSITION_WORLD);
 vec3 forward = normalize((INV_VIEW_MATRIX * vec4(0.0, 0.0, -1.0, 0.0)).xyz);
 float dot_result = dot(dir, forward);
 
 {radius} = max(0.0, {radius} * dot_result);
-float r = length((screen_uv - keyhole_screen_position / VIEWPORT_SIZE.xy) * correction);
+float r = length((SCREEN_UV - keyhole_screen_position / VIEWPORT_SIZE) * correction);
 float alpha_circle = smoothstep({radius} - 0.5 * {radius}, {radius}, r);
 {radius} *= 1.0 + {edge_thickness};
 float edge_circle = smoothstep({radius} - 0.5 * {radius}, {radius}, r);
