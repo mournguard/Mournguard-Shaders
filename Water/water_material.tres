@@ -23,7 +23,7 @@ as_normal_map = true
 [resource]
 render_priority = 0
 shader = ExtResource("1_u3tpa")
-shader_parameter/flow_strength = 0.050000002375
+shader_parameter/flow_strength = 0.05
 shader_parameter/color_shallow = Color(0.639216, 0.717647, 0.768627, 1)
 shader_parameter/color_deep = Color(0.262745, 0.321569, 0.411765, 1)
 shader_parameter/depth_sharpness = 0.10000000475
