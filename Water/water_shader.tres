@@ -28,7 +28,7 @@ operator = 2
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_4rtul"]
 linked_parent_graph_frame = 33
-size = Vector2(1364, 753)
+size = Vector2(1364, 587)
 title = "Distortion / Transparency"
 attached_nodes = PackedInt32Array(82, 122, 81, 120, 110, 121, 111, 141, 142)
 
@@ -74,11 +74,12 @@ linked_parent_graph_frame = 136
 operator = 2
 
 [sub_resource type="VisualShaderNodeFresnel" id="VisualShaderNodeFresnel_xhoq2"]
+default_input_values = [2, false, 3, 0.5]
 linked_parent_graph_frame = 136
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_houh8"]
 linked_parent_graph_frame = 33
-size = Vector2(2084, 1028)
+size = Vector2(1564, 1028)
 title = "Foam"
 attached_nodes = PackedInt32Array(127, 125, 133, 132, 135, 130, 134, 126, 138, 137, 144, 143, 153, 159, 154, 152)
 
@@ -167,12 +168,12 @@ default_value_enabled = true
 default_value = 0.5
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_otd83"]
-size = Vector2(1664, 1045)
+size = Vector2(1265, 1045)
 title = "Normals"
 attached_nodes = PackedInt32Array(33, 6, 20, 16, 5, 28, 47, 59, 60, 18, 7, 21)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_74g4y"]
-size = Vector2(3284, 1974)
+size = Vector2(244, 267)
 title = "Albedo"
 attached_nodes = PackedInt32Array(85, 90, 123, 124, 136, 129)
 
@@ -206,7 +207,7 @@ linked_parent_graph_frame = 30
 op_type = 5
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_4tpem"]
-size = Vector2(1304, 713)
+size = Vector2(1304, 541)
 title = "Depth"
 attached_nodes = PackedInt32Array(43, 42, 44, 45, 80, 92, 93)
 
@@ -278,7 +279,7 @@ linked_parent_graph_frame = 77
 operator = 2
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_0w0sp"]
-size = Vector2(1064, 693)
+size = Vector2(1064, 613)
 title = "Opacity"
 attached_nodes = PackedInt32Array(66, 64, 74, 75, 76, 140)
 
@@ -343,7 +344,7 @@ op_type = 0
 
 [resource]
 code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, depth_test_default, cull_back, diffuse_lambert, specular_schlick_ggx;
+render_mode blend_mix, depth_draw_always, depth_test_default, cull_back, diffuse_lambert, specular_schlick_ggx;
 
 
 // Varyings
@@ -594,7 +595,7 @@ void fragment() {
 
 
 // Fresnel:135
-	float n_in135p3 = 1.00000;
+	float n_in135p3 = 0.50000;
 	float n_out135p0 = pow(1.0 - clamp(dot(NORMAL, VIEW), 0.0, 1.0), n_in135p3);
 
 
@@ -674,6 +675,7 @@ void fragment() {
 
 }
 "
+modes/depth_draw = 1
 varyings/map_001_offset = "0,3"
 varyings/map_002_offset = "0,3"
 varyings/map_003_offset = "0,3"
@@ -836,4 +838,4 @@ nodes/fragment/154/node = SubResource("VisualShaderNodeFloatOp_gefxu")
 nodes/fragment/154/position = Vector2(3080, -2120)
 nodes/fragment/159/node = SubResource("VisualShaderNodeFloatOp_j0vr8")
 nodes/fragment/159/position = Vector2(2860, -1880)
-nodes/fragment/connections = PackedInt32Array(6, 0, 5, 2, 20, 0, 16, 2, 42, 0, 43, 0, 43, 0, 44, 0, 16, 0, 47, 0, 5, 0, 47, 1, 21, 0, 47, 2, 52, 0, 54, 1, 53, 0, 54, 0, 28, 0, 59, 2, 60, 0, 59, 0, 47, 0, 59, 1, 18, 0, 16, 0, 7, 0, 5, 0, 64, 0, 66, 2, 66, 0, 76, 0, 75, 0, 76, 1, 74, 0, 66, 1, 44, 0, 66, 0, 44, 0, 54, 2, 54, 0, 90, 0, 82, 0, 111, 0, 111, 0, 81, 0, 59, 0, 120, 0, 110, 0, 122, 0, 120, 0, 121, 0, 121, 0, 122, 1, 125, 0, 126, 2, 44, 0, 130, 0, 80, 0, 43, 1, 135, 0, 134, 1, 130, 0, 134, 0, 132, 0, 133, 0, 138, 0, 137, 1, 137, 0, 126, 0, 140, 0, 75, 0, 122, 0, 141, 0, 141, 0, 111, 1, 142, 0, 141, 1, 59, 0, 0, 9, 61, 0, 0, 3, 10, 0, 0, 2, 76, 0, 0, 1, 81, 0, 90, 1, 90, 0, 129, 0, 126, 0, 143, 0, 133, 0, 144, 0, 143, 3, 144, 1, 126, 0, 129, 1, 127, 0, 152, 0, 152, 1, 153, 1, 154, 0, 153, 0, 129, 0, 0, 0, 59, 0, 159, 0, 144, 0, 129, 2, 152, 0, 154, 0, 159, 0, 154, 1, 134, 0, 132, 0, 153, 0, 137, 0)
+nodes/fragment/connections = PackedInt32Array(6, 0, 5, 2, 20, 0, 16, 2, 42, 0, 43, 0, 43, 0, 44, 0, 16, 0, 47, 0, 5, 0, 47, 1, 21, 0, 47, 2, 52, 0, 54, 1, 53, 0, 54, 0, 28, 0, 59, 2, 60, 0, 59, 0, 47, 0, 59, 1, 18, 0, 16, 0, 7, 0, 5, 0, 64, 0, 66, 2, 66, 0, 76, 0, 75, 0, 76, 1, 74, 0, 66, 1, 44, 0, 66, 0, 44, 0, 54, 2, 54, 0, 90, 0, 82, 0, 111, 0, 111, 0, 81, 0, 59, 0, 120, 0, 110, 0, 122, 0, 120, 0, 121, 0, 121, 0, 122, 1, 125, 0, 126, 2, 44, 0, 130, 0, 80, 0, 43, 1, 135, 0, 134, 1, 130, 0, 134, 0, 132, 0, 133, 0, 138, 0, 137, 1, 137, 0, 126, 0, 140, 0, 75, 0, 122, 0, 141, 0, 141, 0, 111, 1, 142, 0, 141, 1, 59, 0, 0, 9, 61, 0, 0, 3, 10, 0, 0, 2, 76, 0, 0, 1, 81, 0, 90, 1, 90, 0, 129, 0, 126, 0, 143, 0, 133, 0, 144, 0, 143, 3, 144, 1, 126, 0, 129, 1, 127, 0, 152, 0, 152, 1, 153, 1, 154, 0, 153, 0, 129, 0, 0, 0, 59, 0, 159, 0, 144, 0, 129, 2, 152, 0, 154, 0, 159, 0, 154, 1, 153, 0, 137, 0, 134, 0, 132, 0)
