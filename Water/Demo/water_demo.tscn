@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://8je6n0wn5bgf"]
+[gd_scene load_steps=9 format=3 uid="uid://8je6n0wn5bgf"]
 
 [ext_resource type="Material" uid="uid://imhpc6nmwktm" path="res://addons/Mournguard-Shaders/Water/water_material.tres" id="1_t46t2"]
 [ext_resource type="VoxelGIData" uid="uid://b70cbdmgc8r7y" path="res://addons/Mournguard-Shaders/Water/Demo/water_demo.VoxelGI_data.res" id="2_0c71k"]
@@ -26,6 +26,10 @@ outer_radius = 9.0
 [sub_resource type="TorusMesh" id="TorusMesh_4bmwp"]
 inner_radius = 8.0
 outer_radius = 10.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_t46t2"]
+height = 2.692627
+radius = 10.081055
 
 [node name="WaterDemo" type="Node3D"]
 
@@ -55,6 +59,12 @@ rings = 64
 radius = 9.0
 height = 1.0
 sides = 32
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.71999764, 0)
+shape = SubResource("CylinderShape3D_t46t2")
 
 [node name="VoxelGI" type="VoxelGI" parent="."]
 subdiv = 0
